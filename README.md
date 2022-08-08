@@ -19,7 +19,7 @@ The dataset is available at: [dataset/WQCWQ1.1_KGQG.tar.gz](dataset/WQCWQ1.1_KGQ
 
 #### PathQuestion
 
-We also reprocess [PathQuestion](https://github.com/zmtkeke/IRN). The original dataset did not provide entity mid, so we tried to do entity linking in Freebase using some string matching stratergies. Note that despite missing entity mid, we are able to construct a subgraph based on the entity name and generate a question as well.
+We also reprocess [PathQuestion](https://github.com/zmtkeke/IRN). The original dataset did not provide entity mid, so we try to do entity linking in Freebase using some string matching strategies. Note that despite missing entity mid, we are able to construct the subgraph based on the entity name and generate questions as well.
 
 The dataset is available at: [dataset/PathQuestion_KGQG.tar.gz](dataset/PathQuestion_KGQG.tar.gz)
 
