@@ -2,7 +2,6 @@
 
 AutoQGS: Auto-Prompt for Low-Resource Knowledge-based Question Generation from SPARQL
 
-This paper was published at 31st ACM International Conference on Information and Knowledge Management (CIKM 2022).
 
 ## Abstract
 
