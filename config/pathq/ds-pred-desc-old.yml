@@ -1,0 +1,68 @@
+# export PYTHONPATH=`pwd` && echo $PYTHONPATH
+# python main/run_ds_bart.py -c config/pathq/ds-pred-desc-old.yml
+
+# helper
+only_test_mode: true
+test_mode: true
+debug: false
+eval_all: true
+
+# ver + path
+dataset: "pathq"
+ver: "ds-simpleQ_pathQ-desc-pattent"
+serialization_dir: save/ds-bart-wiki18
+predictions_output_file: predictions.json
+vocabulary: vocabulary
+load_weights_file: weights.th
+save_weights_file: weights.th
+metrics_output_file: evaluate_metric.json
+comments: "使用type占位符替代实体，修正sub字符问题"
+model_name: "pretrained_models/facebook/bart-base"
+
+update_layers: "all"
+
+predict_vers: ["7"]
+
+# path
+train_dataset: ""
+dataset_file: "datasets/PathQuestion-all-infos-v1.0/all.jsonl"
+pmt_save_dir: "datasets/for_pmt/pathq/pmt_predict/merge-pattent-1.0/"
+
+load_model: false
+
+# ds
+setting: "ds-merge-desc-pattent"
+add_desc: true
+
+# beam
+beam_size: 20
+beam_length_penalty: 1.0
+max_decoding_steps: 512
+# rerun_ids: "save/ds-bart-wiki18/ds-merge-desc-pattent/errids-ver-10-penalty-1.0.json"
+
+# optimizer
+weight_decay: 1e-5
+warmup_proportion: 0.1  # best: 1.6w-3w. 2219611 / 32 * 5 epoch * 0.1 = 3.4w
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+alpha: 1e-4
+learning_rate: 3e-5
+num_gradient_accumulation_steps: 0
+
+
+# train
+num_epochs: 0
+max_instances_train: 0
+train_batch_size: 0
+factor_scheduler: 0.95
+patience_scheduler: 1
+patience_trainer: 3
+cuda_index: 0
+grad_clipping: 1.0
+
+# test
+test_batch_size: 24
+max_instances_test: null
+
+# log
+log_name: "log.json"

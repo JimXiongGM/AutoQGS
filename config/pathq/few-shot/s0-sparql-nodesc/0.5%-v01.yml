@@ -1,0 +1,74 @@
+# export PYTHONPATH=`pwd` && echo $PYTHONPATH
+# python main/run_pmt_bart.py -c config/pathq/few-shot/s0-sparql-nodesc/bart-0.5%-full-v01.yml
+
+# helper
+only_test_mode: false
+test_mode: true
+debug: false
+eval_all: true
+
+# ver + path
+dataset: "pathq"
+ver: "0.5%-v01"
+serialization_dir: save/pathq/s2s-bart-fewshot/sparql-nomid
+predictions_output_file: predictions.json
+vocabulary: vocabulary
+load_weights_file: weights.th
+save_weights_file: weights.th
+metrics_output_file: evaluate_metric.json
+comments: "few shot"
+model_name: "pretrained_models/facebook/bart-base"
+
+update_layers: "all"
+
+# path
+datasets: "datasets/PathQuestion-all-infos-v1.0/all.jsonl"
+ids_map: "datasets/PathQuestion-all-infos-v1.0/ids_map.json"
+
+load_model: false
+
+# optimizer
+weight_decay: 1e-5
+warmup_proportion: 0.0535 # 1100
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+alpha: 1e-4
+learning_rate: 5e-5
+num_gradient_accumulation_steps: 1
+
+# beam
+beam_size: 5
+max_decoding_steps: 64
+beam_length_penalty: 1.0
+
+# data
+decoder_prompt: "my question is, "
+decoder_instructions: false
+beam_sample: null
+setting: "sparql-nomid"
+
+# special
+max_instances_percent_train: 0.005
+max_instances_percent_dev: 1
+
+# train
+num_epochs: 99
+max_instances_train: null
+train_batch_size: 24
+# factor_scheduler: 0.9
+# patience_scheduler: 2
+patience_trainer: 15
+cuda_index: 0
+grad_clipping: 1.0
+
+# dev
+max_instances_dev: null # 2528it
+dev_batch_size: 32
+dev_batches_per_epoch: null
+
+# test
+max_instances_test: null # 2532it
+test_batch_size: 32
+
+# log
+log_name: "log.json"

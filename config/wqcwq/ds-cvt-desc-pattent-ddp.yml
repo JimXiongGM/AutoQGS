@@ -1,0 +1,65 @@
+# export PYTHONPATH=`pwd` && echo $PYTHONPATH
+# python main/run_ds_bart_ddp.py -c config/DS-desc/ds-cvt-desc-pattent-ddp.yml
+
+# helper
+only_test_mode: false
+test_mode: false
+debug: false
+eval_all: false
+
+# ver + path
+ver: "ds-cvt-desc-pattent-3.0"
+serialization_dir: save/ds-bart-wiki18
+predictions_output_file: predictions.json
+vocabulary: vocabulary
+load_weights_file: weights.th
+save_weights_file: weights.th
+metrics_output_file: evaluate_metric.json
+comments: "使用type占位符替代实体，全小写"
+model_name: "pretrained_models/facebook/bart-base"
+max_length: 512
+
+update_layers: "all"
+
+predict_vers: [""]
+
+# distributed
+distributed: True
+world_size: 2 # 默认 0,1,2 ... world_size-1
+
+# path
+train_dataset: "datasets/for_pmt/ds-wiki18/cvt-wqcwq-filterByWeight-DESC-random-v2.0.jsonl"
+dataset_dir: ""
+pmt_save_dir: ""
+
+load_model: false
+
+# ds
+setting: "ds-merge-desc-pattent"
+add_desc: true
+
+# beam
+beam_size: 10
+beam_length_penalty: 1.2
+max_decoding_steps: 1024
+
+# optimizer
+weight_decay: 1e-5
+warmup_proportion: 0.1  # best: 1.6w-3w. 1984305 / 32 * 5 epoch * 0.1 = 3.4w
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+alpha: 1e-4
+learning_rate: 3e-5
+num_gradient_accumulation_steps: 2
+
+# train
+num_epochs: 20
+max_instances_train: null
+train_batch_size: 16 # per gpu
+factor_scheduler: 0.9
+patience_scheduler: 1
+patience_trainer: 3
+grad_clipping: 1.0
+
+# log
+log_name: "log.json"

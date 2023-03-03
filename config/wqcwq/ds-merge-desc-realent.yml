@@ -1,0 +1,66 @@
+# export PYTHONPATH=`pwd` && echo $PYTHONPATH
+# python main/run_ds_bart.py -c config/wqcwq/ds-merge-desc-realent.yml
+
+# helper
+only_test_mode: true
+test_mode: true
+debug: false
+eval_all: true
+
+# ver + path
+dataset: wqcwq
+ver: "ds-merge-desc-realent"
+serialization_dir: save/ds-bart-wiki18
+predictions_output_file: predictions.json
+vocabulary: vocabulary
+load_weights_file: weights.th
+save_weights_file: weights.th
+metrics_output_file: evaluate_metric.json
+comments: "实体均实例化"
+model_name: "pretrained_models/facebook/bart-base"
+
+update_layers: "all"
+
+predict_vers: ["9","19"]
+
+# path
+train_dataset: ""
+dataset_file: "datasets/wqcwq-all-infos-v1.0/all-cvt-pred.jsonl"
+
+load_model: false
+
+# ds
+setting: "ds-merge-desc-realent"
+add_desc: true
+
+# beam
+beam_size: 10
+beam_length_penalty: 1.0
+max_decoding_steps: 200
+# rerun_ids: ""
+
+# optimizer
+weight_decay: 1e-5
+warmup_proportion: 0.1  # best: 1.6w-3w. 2219611 / 32 * 5 epoch * 0.1 = 3.4w
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+alpha: 1e-4
+learning_rate: 5e-5
+num_gradient_accumulation_steps: 0
+
+# train
+num_epochs: 0
+max_instances_train: 0
+train_batch_size: 0
+factor_scheduler: 0.95
+patience_scheduler: 1
+patience_trainer: 3
+cuda_index: 0
+grad_clipping: 1.0
+
+# test
+test_batch_size: 24
+max_instances_test: null
+
+# log
+log_name: "log.json"

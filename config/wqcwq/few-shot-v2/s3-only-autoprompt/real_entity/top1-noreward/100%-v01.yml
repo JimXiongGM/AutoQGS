@@ -1,0 +1,77 @@
+# export PYTHONPATH=`pwd` && echo $PYTHONPATH
+# python main/run_pmt_bart.py -c config/wqcwq/few-shot-v2/s3-only-autoprompt/real_entity/top1-noreward/100%-v01.yml
+
+# helper
+re_eval_test: false
+only_test_mode: false
+test_mode: true
+debug: false
+eval_all: true
+
+# ver + path
+dataset: "wqcwq"
+ver: "100%"
+serialization_dir: save/wqcwq/s2s-bart-fewshot/only-autoprompt/realent/top1-noreward
+predictions_output_file: predictions.json
+vocabulary: vocabulary
+load_weights_file: weights.th
+save_weights_file: weights.th
+metrics_output_file: evaluate_metric.json
+comments: "重点关注 使用100%数据训练；使用beam10增强；使用 ent (the ?c)"
+model_name: "pretrained_models/facebook/bart-base"
+
+update_layers: "all"
+
+# path
+datasets: "datasets/for_pmt/merge-beam/wqcwq/all-realent-ver-19-penalty-1.0.jsonl"
+ids_map: "datasets/wqcwq-all-infos-v1.0/ids_map_v2.0.json"
+# reward_map: "datasets/for_pmt/merge-beam/wqcwq/all-pattent-beam_scores-ver-9-penalty-1.0.jsonl"
+
+load_model: false
+
+# optimizer
+weight_decay: 1e-5
+warmup_proportion: 0.3
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+alpha: 1e-4
+learning_rate: 3e-5
+num_gradient_accumulation_steps: 1
+
+# beam
+top_beam: 1
+beam_size: 10
+max_decoding_steps: 256
+beam_length_penalty: 1.0
+beam_sample: "top1"  # top1 random jaccard all
+
+# data
+decoder_prompt: "my question is, "
+decoder_instructions: false
+setting: "only-autoprompt"
+
+# special
+max_instances_percent_train: 1
+max_instances_percent_dev: 1
+
+# train
+num_epochs: 99
+max_instances_train: null
+train_batch_size: 64
+factor_scheduler: 0.9
+patience_scheduler: 2
+patience_trainer: 10
+cuda_index: 0
+grad_clipping: 1.0
+
+# dev
+max_instances_dev: null # 2527it
+dev_batch_size: 32
+dev_batches_per_epoch: 20
+
+# test
+max_instances_test: null # 2531it
+test_batch_size: 32
+
+# log
+log_name: "log.json"

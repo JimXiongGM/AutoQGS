@@ -1,0 +1,6 @@
+allennlp
+allennlp-models
+nltk
+spacy
+rouge
+SPARQLWrapper
