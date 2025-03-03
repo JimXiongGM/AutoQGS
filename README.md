@@ -1,6 +1,21 @@
 # AutoQGS
 
-This repository contains the code for the CIKM 2022 paper: [AutoQGS: Auto-Prompt for Low-Resource Knowledge-based Question Generation from SPARQL](https://doi.org/10.1145/3511808.3557246).
+
+This repository contains the code for CIKM 2022 paper "AutoQGS: Auto-Prompt for Low-Resource Knowledge-based Question Generation from SPARQL"
+
+<div align="center">
+
+[![ACM Digital Library](https://img.shields.io/badge/ACM%20Digital%20Library-blue)](https://doi.org/10.1145/3511808.3557246)
+[![arXiv](https://img.shields.io/badge/arXiv-2208.12461-blue)](https://arxiv.org/abs/2208.12461)
+
+</div>
+
+This figure illustrates the overall process.
+
+<div align="center">
+  <img src="./main_fig.png" alt="overall process" width="90%">
+</div>
+
 
 ## Environment Setup
 
